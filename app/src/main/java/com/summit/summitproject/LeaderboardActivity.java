@@ -87,11 +87,11 @@ public class LeaderboardActivity extends AppCompatActivity implements FriendAdap
         // Prepare the list data
 
         List<Friend> friends = new ArrayList<>();
-        friends.add(new Friend("Sam Edwards", "handstandsam", 99.0, true));
-        friends.add(new Friend("Arman Parastaran", "biden", 99.0, true));
-        friends.add(new Friend("Kenneth Shinn", "biden", 99.0, true));
-        friends.add(new Friend("Allen Cheng", "biden", 99.0, true));
-        friends.add(new Friend("Shane Aung", "biden", 99.0, true));
+        friends.add(new Friend("Sam Edwards", "handstandsam", 2.0, true, R.drawable.sam));
+        friends.add(new Friend("Arman Parastaran", "pararaman", 15.0, true, R.drawable.arman));
+        friends.add(new Friend("Kenneth Shinn", "kshinn", 65.0, true, R.drawable.kenneth));
+        friends.add(new Friend("Alan Cheng", "acheng5168", -5.0, true, R.drawable.alan));
+        friends.add(new Friend("Shane Aung", "shaneng", -300.0, true, R.drawable.shane));
 
         friendsAdapter = new FriendAdapter(friends, this);
         transactionsList.setLayoutManager(new LinearLayoutManager(this));

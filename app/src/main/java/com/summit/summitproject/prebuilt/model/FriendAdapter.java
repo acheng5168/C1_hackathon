@@ -1,12 +1,12 @@
 package com.summit.summitproject.prebuilt.model;
 
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.summit.summitproject.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -39,6 +40,9 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
      * if the user clicks on a particular row.
      */
     public FriendAdapter(List<Friend> friends, FriendClickedListener listener) {
+
+        Collections.sort(friends);
+        Collections.reverse(friends);
         this.friends = friends;
         this.listener = listener;
     }
@@ -53,7 +57,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_transaction, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_friend, parent, false);
         return new ViewHolder(view);
     }
 
@@ -67,8 +71,22 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
         Friend friend = friends.get(position);
         holder.name.setText(friend.getName());
         holder.username.setText(friend.getUsername());
+        if (friend.getPercent() >= 0) {
+            holder.gainArrow.setImageResource(R.drawable.arrowup);
+        } else {
+            holder.gainArrow.setImageResource(R.drawable.arrowdown);
+        }
+
         holder.gainAmount.setText(friend.getPercent()+"");
         holder.username.setText(friend.getUsername());
+        if (friend.getPercent() >= 0) {
+            holder.cardView.setCardBackgroundColor(Color.parseColor("#CEF6D8"));
+
+        } else {
+            holder.cardView.setCardBackgroundColor(Color.parseColor("#F8E6E0"));
+        }
+
+        holder.profilePic.setImageResource(friend.imageResource);
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,6 +125,8 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
 
         ImageView gainArrow;
 
+        ImageView profilePic;
+
         ViewHolder(View rootView) {
             super(rootView);
             cardView = rootView.findViewById(R.id.card_container);
@@ -114,8 +134,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
             gainAmount = rootView.findViewById(R.id.gainAmount);
             username = rootView.findViewById(R.id.username);
             gainArrow = rootView.findViewById(R.id.gainArrow);
-
-//            amount = rootView.findViewById(R.id.amount);
+            profilePic = rootView.findViewById(R.id.profilePic);
         }
     }
 

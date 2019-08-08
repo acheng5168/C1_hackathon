@@ -5,18 +5,20 @@ import java.io.Serializable;
 /**
  * Represents a simple credit card transaction -- containing the merchant and the amount.
  */
-public class Friend implements Serializable {
+public class Friend implements Serializable, Comparable {
 
     private final String name;
     private final String username;
     private double percent;
     private boolean hasGained;
+    int imageResource;
 
-    public Friend(String name, String username, double percent, boolean hasGained) {
+    public Friend(String name, String username, double percent, boolean hasGained, int imageResource) {
         this.name = name;
         this.username = username;
         this.percent = percent;
         this.hasGained = hasGained;
+        this.imageResource = imageResource;
     }
 
     public String getName() {
@@ -27,14 +29,19 @@ public class Friend implements Serializable {
         return this.username;
     }
 
-    public double getPercent() { return this.percent; }
+    public double getPercent() {
+        return this.percent;
+    }
 
-    public void setPercent(double newPercent){
+    public void setPercent(double newPercent) {
         percent = newPercent;
     }
 
-    public boolean hasGained() { return this.hasGained; }
-    public void flipGain(){
+    public boolean hasGained() {
+        return this.hasGained;
+    }
+
+    public void flipGain() {
         hasGained = !hasGained;
     }
 
@@ -44,4 +51,9 @@ public class Friend implements Serializable {
         return "Name: " + this.name + ", Username: " + this.username;
     }
 
+    @Override
+    public int compareTo(Object o) {
+        Friend otherFriend = (Friend) o;
+        return (int) Math.ceil(this.getPercent() - otherFriend.getPercent());
+    }
 }

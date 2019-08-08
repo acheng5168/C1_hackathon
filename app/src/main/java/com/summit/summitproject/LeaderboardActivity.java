@@ -12,59 +12,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
+import com.summit.summitproject.prebuilt.model.FeedAction;
+import com.summit.summitproject.prebuilt.model.FeedAdapter;
 import com.summit.summitproject.prebuilt.model.Friend;
 import com.summit.summitproject.prebuilt.model.FriendAdapter;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-/**
- * Displays a user's name, the last 4 numbers of a credit card, and their recent transactions
- * for that card.
- * <br>
- * Expects the following pieces of data to be supplied via the {@link android.content.Intent}:
- * <ul>
- * <li>User's name -- via {@link LeaderboardActivity#KEY_NAME}</li>
- * <li>The last four numbers of a credit card -- via {@link LeaderboardActivity#KEY_CARD_NUM}</li>
- * <li>Recent transactions for the credit card -- via {@link LeaderboardActivity#KEY_TRANSACTIONS}</li>
- * </ul>
- */
 public class LeaderboardActivity extends AppCompatActivity implements FriendAdapter.FriendClickedListener {
 
-    /**
-     * Used to extract the user's name from the launch {@link android.content.Intent}
-     */
-    public static final String KEY_NAME = "NAME";
-
-    /**
-     * Used to extract a credit card last 4 from the launch {@link android.content.Intent}
-     */
-    public static final String KEY_CARD_NUM = "CARD_NUM";
-
-    /**
-     * Used to extract a credit card's transaction from the launch {@link android.content.Intent}
-     */
-    public static final String KEY_TRANSACTIONS = "TRANSACTIONS";
-
-    // Data passed in via the Intent
-
-    private String name;
-
-    private String cardNum;
-
-    // UI Widgets
-
-    private TextView title;
-
-    private TextView subtitle;
-
-    private RecyclerView transactionsList;
+    private RecyclerView leaderboard_list;
+    private RecyclerView feed_list;
 
     /**
      * Takes the transactions data and instructs the transactionsList on how they should be
      * rendered.
      */
     private RecyclerView.Adapter friendsAdapter;
+    private RecyclerView.Adapter feedAdapter;
 
     /**
      * Called the first time an Activity is created, but before any UI is shown to the user.
@@ -84,47 +51,55 @@ public class LeaderboardActivity extends AppCompatActivity implements FriendAdap
                                     }
                 );
 
-//        name = getIntent().getStringExtra(KEY_NAME);
-//        cardNum = getIntent().getStringExtra(KEY_CARD_NUM);
-//        transactions = (List<Transaction>) getIntent().getSerializableExtra(KEY_TRANSACTIONS);
-//
-//        title = findViewById(R.id.summary_title);
-//        subtitle = findViewById(R.id.summary_subtitle);
-        transactionsList = findViewById(R.id.leaderboard_list);
-//
-//        // Substitute in the user's name and card last 4 in the text widgets
-//        title.setText(getString(R.string.summary_title, name));
-//        subtitle.setText(getString(R.string.summary_subtitle, cardNum));
-//
+        leaderboard_list = findViewById(R.id.leaderboard_list);
+        feed_list = findViewById(R.id.feed_list);
+        feed_list.setVisibility(View.GONE);
+
+
         // Prepare the list data
 
         List<Friend> friends = new ArrayList<>();
-        friends.add(new Friend("Sam Edwards", "handstandsam", 2.0, true, R.drawable.sam));
-        friends.add(new Friend("Arman Parastaran", "pararaman", 15.0, true, R.drawable.arman));
-        friends.add(new Friend("Kenneth Shinn", "kshinn", 65.0, true, R.drawable.kenneth));
+        friends.add(new Friend("Sam Edwards", "handstandsam", 17.0, true, R.drawable.sam));
+        friends.add(new Friend("Arman Parastaran", "pararaman", 7.0, true, R.drawable.arman));
+        friends.add(new Friend("Kenneth Shinn", "kshinn", 3.0, true, R.drawable.kenneth));
         friends.add(new Friend("Alan Cheng", "acheng5168", -5.0, true, R.drawable.alan));
-        friends.add(new Friend("Shane Aung", "shaneng", 300.0, true, R.drawable.shane));
+        friends.add(new Friend("Shane Aung", "brown_cowboy", 1.0, true, R.drawable.shane));
 
         friendsAdapter = new FriendAdapter(friends, this);
-        transactionsList.setLayoutManager(new LinearLayoutManager(this));
-        transactionsList.setAdapter(friendsAdapter);
+        leaderboard_list.setLayoutManager(new LinearLayoutManager(this));
+        leaderboard_list.setAdapter(friendsAdapter);
+
+        // Prepare the feed data
+        List<FeedAction> feed = new ArrayList<>();
+        feed.add(new FeedAction("Kenneth Shinn", "June 26 2019", "AAPL", 10.2, 9.6, true));
+        feed.add(new FeedAction("Arman Parastaran", "June 26 2019", "AMD", 12.3, 18.6, true));
+        feed.add(new FeedAction("Shane Aung", "June 26 2019", "AAPL", 10.2, 9.6, false));
+        feed.add(new FeedAction("Alan Cheng", "June 26 2019", "GOOG", 100.7, 127.74, false));
+        feed.add(new FeedAction("Sam Edwards", "June 26 2019", "TSLA", 464.87, 326.74, false));
 
 
-        final View redButton = findViewById(R.id.redButton);
+        feedAdapter = new FeedAdapter(feed, this);
+        feed_list.setLayoutManager(new LinearLayoutManager(this));
+        feed_list.setAdapter(feedAdapter);
+
+
+
+
+        final View feed_list = findViewById(R.id.feed_list);
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int tabIndex = tab.getPosition();
                 if (tabIndex == 0) {
-                    //Activity
-                    redButton.setVisibility(View.GONE);
-                    transactionsList.setVisibility(View.VISIBLE);
+                    //leaderboard
+                    feed_list.setVisibility(View.GONE);
+                    leaderboard_list.setVisibility(View.VISIBLE);
 
                 } else {
-                    //Analytics
-                    transactionsList.setVisibility(View.GONE);
-                    redButton.setVisibility(View.VISIBLE);
+                    //feed
+                    leaderboard_list.setVisibility(View.GONE);
+                    feed_list.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -145,7 +120,7 @@ public class LeaderboardActivity extends AppCompatActivity implements FriendAdap
      * open up a new screen to further show transaction details.
      */
     @Override
-    public void onFriendClicked(Friend transaction) {
-        Toast.makeText(this, getString(R.string.transaction_selected, transaction.getName()), Toast.LENGTH_LONG).show();
+    public void onFriendClicked(Friend friend) {
+        Toast.makeText(this, getString(R.string.transaction_selected, friend.getName()), Toast.LENGTH_LONG).show();
     }
 }

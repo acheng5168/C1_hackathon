@@ -76,7 +76,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         transactionsList = findViewById(R.id.transaction_list);
 
-        final View redButton = findViewById(R.id.redButton);
+        final View redButton = findViewById(R.id.whiteOverlay);
 
         TabLayout tabLayout = findViewById(R.id.profile_tabLayout);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

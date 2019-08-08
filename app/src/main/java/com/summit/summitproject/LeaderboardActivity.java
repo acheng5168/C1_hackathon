@@ -103,7 +103,7 @@ public class LeaderboardActivity extends AppCompatActivity implements FriendAdap
         friends.add(new Friend("Arman Parastaran", "pararaman", 15.0, true, R.drawable.arman));
         friends.add(new Friend("Kenneth Shinn", "kshinn", 65.0, true, R.drawable.kenneth));
         friends.add(new Friend("Alan Cheng", "acheng5168", -5.0, true, R.drawable.alan));
-        friends.add(new Friend("Shane Aung", "shaneng", -300.0, true, R.drawable.shane));
+        friends.add(new Friend("Shane Aung", "shaneng", 300.0, true, R.drawable.shane));
 
         friendsAdapter = new FriendAdapter(friends, this);
         transactionsList.setLayoutManager(new LinearLayoutManager(this));

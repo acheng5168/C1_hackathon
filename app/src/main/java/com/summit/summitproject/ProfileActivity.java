@@ -4,18 +4,12 @@ package com.summit.summitproject;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
-import com.summit.summitproject.prebuilt.model.Friend;
-
-import java.util.List;
 
 /**
  * Displays a user's name, the last 4 numbers of a credit card, and their recent transactions
@@ -23,12 +17,12 @@ import java.util.List;
  * <br>
  * Expects the following pieces of data to be supplied via the {@link android.content.Intent}:
  * <ul>
- * <li>User's name -- via {@link SummaryActivity#KEY_NAME}</li>
- * <li>The last four numbers of a credit card -- via {@link SummaryActivity#KEY_CARD_NUM}</li>
- * <li>Recent transactions for the credit card -- via {@link SummaryActivity#KEY_TRANSACTIONS}</li>
+ * <li>User's name -- via {@link ProfileActivity#KEY_NAME}</li>
+ * <li>The last four numbers of a credit card -- via {@link ProfileActivity#KEY_CARD_NUM}</li>
+ * <li>Recent transactions for the credit card -- via {@link ProfileActivity#KEY_TRANSACTIONS}</li>
  * </ul>
  */
-public class SummaryActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 
     /**
      * Used to extract the user's name from the launch {@link android.content.Intent}
@@ -74,7 +68,7 @@ public class SummaryActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_summary);
+        setContentView(R.layout.profile);
 
         name = getIntent().getStringExtra(KEY_NAME);
         cardNum = getIntent().getStringExtra(KEY_CARD_NUM);

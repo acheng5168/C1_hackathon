@@ -1,12 +1,16 @@
 package com.summit.summitproject.prebuilt.model;
 
-import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
-import androidx.recyclerview.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.summit.summitproject.R;
 
@@ -18,24 +22,24 @@ import java.util.List;
  * should be displayed in the list and tells the UI how each individual piece of data should be
  * rendered.
  */
-public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHolder> {
+public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder> {
 
     /**
      * The list of credit card transactions which will be adapted to the UI.
      */
-    private List<Transaction> transactions = new ArrayList<>();
+    private List<Friend> friends = new ArrayList<>();
 
     /**
      * A listener to deliver callbacks to whenever a transaction in the list is clicked.
      */
-    private TransactionClickedListener listener;
+    private FriendClickedListener listener;
 
     /**
      * Takes in the list of transactions that should be rendered and a listener to receive callbacks
      * if the user clicks on a particular row.
      */
-    public TransactionAdapter(List<Transaction> transactions, TransactionClickedListener listener) {
-        this.transactions = transactions;
+    public FriendAdapter(List<Friend> friends, FriendClickedListener listener) {
+        this.friends = friends;
         this.listener = listener;
     }
 
@@ -44,7 +48,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
      * all of our rows look the same, so we just inflate the same layout for all rows.
      * <br>
      * The new row isn't filled with data yet, that's done by
-     * {@link TransactionAdapter#onBindViewHolder(ViewHolder, int)}
+     * {@link FriendAdapter#onBindViewHolder(ViewHolder, int)}
      */
     @NonNull
     @Override
@@ -60,16 +64,21 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         // Use the transaction at index {position} to set up the row's UI widgets
-        holder.merchant.setText(transactions.get(position).getMerchant());
-        holder.amount.setText(transactions.get(position).getAmount());
+        Friend friend = friends.get(position);
+        holder.name.setText(friend.getName());
+        holder.username.setText(friend.getUsername());
+        holder.gainAmount.setText(friend.getPercent()+"");
+        holder.username.setText(friend.getUsername());
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Inform the click listener that this row was clicked and pass the Transaction
-                // associated with this row.
-                if (listener != null) {
-                    listener.onTransactionClicked(transactions.get(holder.getAdapterPosition()));
-                }
+                Friend clickedOnFriend = friends.get(holder.getAdapterPosition());
+                Log.d("Friend", "Clicked "+ clickedOnFriend.getName());
+//                // Inform the click listener that this row was clicked and pass the Transaction
+//                // associated with this row.
+//                if (listener != null) {
+//                    listener.onTransactionClicked());
+//                }
             }
         });
     }
@@ -79,33 +88,43 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
      */
     @Override
     public int getItemCount() {
-        return transactions.size();
+        return friends.size();
     }
 
     /**
      * Holds the UI widgets which will comprise a single row in the list (to render
-     * a {@link Transaction}).
+     * a {@link Friend}).
      */
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         CardView cardView;
 
-        TextView merchant;
+        TextView name;
 
-        TextView amount;
+        TextView gainAmount;
+
+        TextView username;
+
+        ImageView gainArrow;
 
         ViewHolder(View rootView) {
             super(rootView);
             cardView = rootView.findViewById(R.id.card_container);
-            merchant = rootView.findViewById(R.id.merchant);
-            amount = rootView.findViewById(R.id.amount);
+            name = rootView.findViewById(R.id.name);
+            gainAmount = rootView.findViewById(R.id.gainAmount);
+            username = rootView.findViewById(R.id.username);
+            gainArrow = rootView.findViewById(R.id.gainArrow);
+
+//            amount = rootView.findViewById(R.id.amount);
         }
     }
 
     /**
      * Will receive callbacks whenever a transaction in the list is clicked.
+     * <p>
+     * NOTE: Implement this when you want to click a row and go straight to the profile
      */
-    public interface TransactionClickedListener {
-        void onTransactionClicked(Transaction transaction);
+    public interface FriendClickedListener {
+        void onFriendClicked(Friend friend);
     }
 }

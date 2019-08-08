@@ -13,8 +13,7 @@ import android.widget.Toast;
 
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
-import com.summit.summitproject.prebuilt.model.Transaction;
-import com.summit.summitproject.prebuilt.model.TransactionAdapter;
+import com.summit.summitproject.prebuilt.model.Friend;
 
 import java.util.List;
 
@@ -29,7 +28,7 @@ import java.util.List;
  * <li>Recent transactions for the credit card -- via {@link SummaryActivity#KEY_TRANSACTIONS}</li>
  * </ul>
  */
-public class SummaryActivity extends AppCompatActivity implements TransactionAdapter.TransactionClickedListener {
+public class SummaryActivity extends AppCompatActivity {
 
     /**
      * Used to extract the user's name from the launch {@link android.content.Intent}
@@ -52,7 +51,7 @@ public class SummaryActivity extends AppCompatActivity implements TransactionAda
 
     private String cardNum;
 
-    private List<Transaction> transactions;
+//    private List<Transaction> transactions;
 
     // UI Widgets
 
@@ -79,7 +78,7 @@ public class SummaryActivity extends AppCompatActivity implements TransactionAda
 
         name = getIntent().getStringExtra(KEY_NAME);
         cardNum = getIntent().getStringExtra(KEY_CARD_NUM);
-        transactions = (List<Transaction>) getIntent().getSerializableExtra(KEY_TRANSACTIONS);
+//        transactions = (List<Friend>) getIntent().getSerializableExtra(KEY_TRANSACTIONS);
 
         transactionsList = findViewById(R.id.transaction_list);
 
@@ -133,17 +132,17 @@ public class SummaryActivity extends AppCompatActivity implements TransactionAda
 
         // Substitute in the user's name and card last 4 in the text widget
         // Prepare the list data
-        transactionsAdapter = new TransactionAdapter(transactions, this);
-        transactionsList.setLayoutManager(new LinearLayoutManager(this));
-        transactionsList.setAdapter(transactionsAdapter);
+//        transactionsAdapter = new TransactionAdapter(transactions, this);
+//        transactionsList.setLayoutManager(new LinearLayoutManager(this));
+//        transactionsList.setAdapter(transactionsAdapter);
     }
-
-    /**
-     * Called when the user clicks on any of the transactions in the list. From here, you could
-     * open up a new screen to further show transaction details.
-     */
-    @Override
-    public void onTransactionClicked(Transaction transaction) {
-        Toast.makeText(this, getString(R.string.transaction_selected, transaction.getMerchant()), Toast.LENGTH_LONG).show();
-    }
+//
+//    /**
+//     * Called when the user clicks on any of the transactions in the list. From here, you could
+//     * open up a new screen to further show transaction details.
+//     */
+//    @Override
+//    public void onTransactionClicked(Transaction transaction) {
+//        Toast.makeText(this, getString(R.string.transaction_selected, transaction.getMerchant()), Toast.LENGTH_LONG).show();
+//    }
 }

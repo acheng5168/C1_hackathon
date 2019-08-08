@@ -168,12 +168,12 @@
 //                saveUserCredentials();
 //            }
 //
-//            // Start the SummaryActivity and also pass the user's name,
+//            // Start the ProfileActivity and also pass the user's name,
 //            // card number, and list of transactions in the launch intent.
-//            Intent intent = new Intent(LoginActivity.this, SummaryActivity.class);
-//            intent.putExtra(SummaryActivity.KEY_NAME, name);
-//            intent.putExtra(SummaryActivity.KEY_CARD_NUM, cardNum);
-//            intent.putExtra(SummaryActivity.KEY_TRANSACTIONS, transactions);
+//            Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+//            intent.putExtra(ProfileActivity.KEY_NAME, name);
+//            intent.putExtra(ProfileActivity.KEY_CARD_NUM, cardNum);
+//            intent.putExtra(ProfileActivity.KEY_TRANSACTIONS, transactions);
 //            startActivity(intent);
 //
 //        }

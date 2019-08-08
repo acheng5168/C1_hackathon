@@ -18,6 +18,18 @@
         app:layout_constraintTop_toBottomOf="@+id/tabLayout"
         tools:listitem="@layout/view_friend" />
 
+    <Button
+        android:id="@+id/redButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:visibility="gone"
+        android:background="@android:color/holo_red_dark"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"

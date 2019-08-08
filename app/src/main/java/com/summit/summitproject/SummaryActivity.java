@@ -2,12 +2,17 @@ package com.summit.summitproject;
 
 
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
 import com.summit.summitproject.prebuilt.model.Transaction;
 import com.summit.summitproject.prebuilt.model.TransactionAdapter;
 
@@ -19,9 +24,9 @@ import java.util.List;
  * <br>
  * Expects the following pieces of data to be supplied via the {@link android.content.Intent}:
  * <ul>
- *     <li>User's name -- via {@link SummaryActivity#KEY_NAME}</li>
- *     <li>The last four numbers of a credit card -- via {@link SummaryActivity#KEY_CARD_NUM}</li>
- *     <li>Recent transactions for the credit card -- via {@link SummaryActivity#KEY_TRANSACTIONS}</li>
+ * <li>User's name -- via {@link SummaryActivity#KEY_NAME}</li>
+ * <li>The last four numbers of a credit card -- via {@link SummaryActivity#KEY_CARD_NUM}</li>
+ * <li>Recent transactions for the credit card -- via {@link SummaryActivity#KEY_TRANSACTIONS}</li>
  * </ul>
  */
 public class SummaryActivity extends AppCompatActivity implements TransactionAdapter.TransactionClickedListener {
@@ -76,14 +81,57 @@ public class SummaryActivity extends AppCompatActivity implements TransactionAda
         cardNum = getIntent().getStringExtra(KEY_CARD_NUM);
         transactions = (List<Transaction>) getIntent().getSerializableExtra(KEY_TRANSACTIONS);
 
-        title = findViewById(R.id.summary_title);
-        subtitle = findViewById(R.id.summary_subtitle);
         transactionsList = findViewById(R.id.transaction_list);
 
-        // Substitute in the user's name and card last 4 in the text widgets
-        title.setText(getString(R.string.summary_title, name));
-        subtitle.setText(getString(R.string.summary_subtitle, cardNum));
+        final View redButton = findViewById(R.id.redButton);
 
+        TabLayout tabLayout = findViewById(R.id.profile_tabLayout);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                int tabIndex = tab.getPosition();
+                if (tabIndex == 0) {
+                    //Activity
+                    redButton.setVisibility(View.GONE);
+                    transactionsList.setVisibility(View.VISIBLE);
+
+                } else {
+                    //Analytics
+                    transactionsList.setVisibility(View.GONE);
+                    redButton.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+
+//        TabItem analyticTab = findViewById(R.id.analytics_tab);
+//        analyticTab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
+
+
+//        TabItem activityTab = findViewById(R.id.activity_tab);
+//        activityTab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
+
+        // Substitute in the user's name and card last 4 in the text widget
         // Prepare the list data
         transactionsAdapter = new TransactionAdapter(transactions, this);
         transactionsList.setLayoutManager(new LinearLayoutManager(this));

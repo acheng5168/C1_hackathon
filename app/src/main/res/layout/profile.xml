@@ -5,23 +5,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <Button
-        android:id="@+id/redButton"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/profile_analytics_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="8dp"
         android:layout_marginTop="8dp"
         android:visibility="gone"
-        android:background="@android:color/holo_red_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_tabLayout"
         app:layout_constraintVertical_bias="1.0"
-        tools:listitem="@layout/view_activity" />
+        tools:listitem="@layout/view_analytics" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/transaction_list"
+        android:id="@+id/profile_activity_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="8dp"
@@ -132,7 +131,7 @@
             <Button
                 android:id="@+id/button6"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:text="Follow"
                 android:textSize="10sp" />
 

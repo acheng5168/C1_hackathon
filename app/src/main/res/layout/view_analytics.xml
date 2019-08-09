@@ -15,25 +15,29 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_width="379dp"
+            android:layout_height="64dp"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
 
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="GOOGL" />
+                android:id="@+id/stock_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="8dp"
+                android:paddingTop="6dp"
+                android:text="Stock (Price)"
+                android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="% of Total Portfolio:" />
+                android:id="@+id/percentage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="8dp"
+                android:text="Percent of Total Portfolio:"
+                android:textSize="18sp" />
         </LinearLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

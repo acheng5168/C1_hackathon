@@ -5,33 +5,22 @@ import java.io.Serializable;
 /**
  * Represents a simple credit card transaction -- containing the merchant and the amount.
  */
-public class Action implements Serializable {
+public class Analysis implements Serializable {
 
     private final String stock;
-    private final String date;
-    private double priceBought;
-    private double priceCurrent;
+    private final double percentage;
 
-    public Action(String stock, String date, double priceBought, double priceCurrent) {
+    public Analysis(String stock, double percentage) {
         this.stock = stock;
-        this.date = date;
-        this.priceBought = priceBought;
-        this.priceCurrent = priceCurrent;
+        this.percentage = percentage;
     }
 
     public String getStock() {
         return this.stock;
     }
 
-    public String getDate() {
-        return this.date;
+    public double getPercentage() {
+        return this.percentage;
     }
 
-    public double getPriceBought() {
-        return this.priceBought;
-    }
-
-    public double getPriceCurrent() {
-        return this.priceCurrent;
-    }
 }

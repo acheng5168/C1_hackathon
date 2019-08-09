@@ -1,11 +1,8 @@
 package com.summit.summitproject.prebuilt.model;
 
-import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,8 +10,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.summit.summitproject.R;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,24 +19,24 @@ import java.util.List;
  * should be displayed in the list and tells the UI how each individual piece of data should be
  * rendered.
  */
-public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder> {
+public class AnalysisAdapter extends RecyclerView.Adapter<AnalysisAdapter.ViewHolder> {
 
     /**
      * The list of credit card transactions which will be adapted to the UI.
      */
-    private List<Action> actions = new ArrayList<>();
+    private List<Analysis> analyses = new ArrayList<>();
 
     /**
      * A listener to deliver callbacks to whenever a transaction in the list is clicked.
      */
-    private ActionClickedListener listener;
+    private AnalysisClickedListener listener;
 
     /**
      * Takes in the list of transactions that should be rendered and a listener to receive callbacks
      * if the user clicks on a particular row.
      */
-    public ActionAdapter(List<Action> actions, ActionClickedListener listener) {
-        this.actions = actions;
+    public AnalysisAdapter(List<Analysis> analyses, AnalysisClickedListener listener) {
+        this.analyses = analyses;
         this.listener = listener;
     }
 
@@ -50,12 +45,12 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
      * all of our rows look the same, so we just inflate the same layout for all rows.
      * <br>
      * The new row isn't filled with data yet, that's done by
-     * {@link ActionAdapter#onBindViewHolder(ViewHolder, int)}
+     * {@link AnalysisAdapter#onBindViewHolder(ViewHolder, int)}
      */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_activity, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_analytics, parent, false);
         return new ViewHolder(view);
     }
 
@@ -66,11 +61,9 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         // Use the transaction at index {position} to set up the row's UI widgets
-        final Action action = actions.get(position);
-        holder.stock.setText(action.getStock());
-        holder.date.setText(action.getDate());
-        holder.priceBought.setText("$"+action.getPriceBought());
-        holder.priceCurrent.setText("$"+action.getPriceCurrent());
+        final Analysis analysis = analyses.get(position);
+        holder.stock_name.setText(analysis.getStock());
+        holder.percentage.setText("Percent of Total Portfolio: " +analysis.getPercentage() + "%");
     }
 
     /**
@@ -78,7 +71,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
      */
     @Override
     public int getItemCount() {
-        return actions.size();
+        return analyses.size();
     }
 
     /**
@@ -89,21 +82,15 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
 
         CardView cardView;
 
-        TextView stock;
+        TextView stock_name;
 
-        TextView date;
-
-        TextView priceBought;
-
-        TextView priceCurrent;
+        TextView percentage;
 
         ViewHolder(View rootView) {
             super(rootView);
             cardView = rootView.findViewById(R.id.card_container_profile);
-            stock = rootView.findViewById(R.id.stock);
-            date = rootView.findViewById(R.id.date);
-            priceBought = rootView.findViewById(R.id.priceBought);
-            priceCurrent = rootView.findViewById(R.id.priceCurrent);
+            stock_name = rootView.findViewById(R.id.stock_name);
+            percentage = rootView.findViewById(R.id.percentage);
         }
     }
 
@@ -112,7 +99,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
      * <p>
      * NOTE: Implement this when you want to click a row and go straight to the profile
      */
-    public interface ActionClickedListener {
+    public interface AnalysisClickedListener {
         void onActionClicked(Action action);
     }
 }

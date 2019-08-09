@@ -55,7 +55,7 @@
 //    private ProgressBar progress;
 //
 //    /**
-//     * Called the first time an Activity is created, but before any UI is shown to the user.
+//     * Called the first time an Action is created, but before any UI is shown to the user.
 //     * Prepares the layout and assigns UI widget variables.
 //     */
 //    @Override

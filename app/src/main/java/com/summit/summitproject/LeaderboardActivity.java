@@ -67,7 +67,7 @@ public class LeaderboardActivity extends AppCompatActivity implements FriendAdap
     private RecyclerView.Adapter friendsAdapter;
 
     /**
-     * Called the first time an Activity is created, but before any UI is shown to the user.
+     * Called the first time an Action is created, but before any UI is shown to the user.
      * Prepares the layout and assigns UI widget variables.
      */
     @Override
@@ -75,14 +75,12 @@ public class LeaderboardActivity extends AppCompatActivity implements FriendAdap
         super.onCreate(savedInstanceState);
         setContentView(R.layout.leaderboard);
 
-        findViewById(R.id.profileButton)
-                .setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            startActivity(new Intent(LeaderboardActivity.this, ProfileActivity.class));
-                                        }
-                                    }
-                );
+        findViewById(R.id.profileButton).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                            startActivity(new Intent(LeaderboardActivity.this, ProfileActivity.class));
+                    }
+        });
 
 //        name = getIntent().getStringExtra(KEY_NAME);
 //        cardNum = getIntent().getStringExtra(KEY_CARD_NUM);
@@ -117,7 +115,7 @@ public class LeaderboardActivity extends AppCompatActivity implements FriendAdap
             public void onTabSelected(TabLayout.Tab tab) {
                 int tabIndex = tab.getPosition();
                 if (tabIndex == 0) {
-                    //Activity
+                    //Action
                     redButton.setVisibility(View.GONE);
                     transactionsList.setVisibility(View.VISIBLE);
 

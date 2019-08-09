@@ -5,14 +5,14 @@ import java.io.Serializable;
 /**
  * Represents a simple credit card transaction -- containing the merchant and the amount.
  */
-public class Activity implements Serializable {
+public class Action implements Serializable {
 
     private final String stock;
     private final String date;
     private double priceBought;
     private double priceCurrent;
 
-    public Activity(String stock, String date, double priceBought, double priceCurrent) {
+    public Action(String stock, String date, double priceBought, double priceCurrent) {
         this.stock = stock;
         this.date = date;
         this.priceBought = priceBought;

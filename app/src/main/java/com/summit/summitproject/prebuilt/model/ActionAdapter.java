@@ -14,8 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.summit.summitproject.R;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -23,24 +24,24 @@ import java.util.List;
  * should be displayed in the list and tells the UI how each individual piece of data should be
  * rendered.
  */
-public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHolder> {
+public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder> {
 
     /**
      * The list of credit card transactions which will be adapted to the UI.
      */
-    private List<Friend> activity = new ArrayList<>();
+    private List<Action> actions = new ArrayList<>();
 
     /**
      * A listener to deliver callbacks to whenever a transaction in the list is clicked.
      */
-    private FriendClickedListener listener;
+    private ActionClickedListener listener;
 
     /**
      * Takes in the list of transactions that should be rendered and a listener to receive callbacks
      * if the user clicks on a particular row.
      */
-    public ActivityAdapter(List<Friend> activity, FriendClickedListener listener) {
-        this.activity = activity;
+    public ActionAdapter(List<Action> actions, ActionClickedListener listener) {
+        this.actions = actions;
         this.listener = listener;
     }
 
@@ -49,12 +50,12 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
      * all of our rows look the same, so we just inflate the same layout for all rows.
      * <br>
      * The new row isn't filled with data yet, that's done by
-     * {@link ActivityAdapter#onBindViewHolder(ViewHolder, int)}
+     * {@link ActionAdapter#onBindViewHolder(ViewHolder, int)}
      */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_friend, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_activity, parent, false);
         return new ViewHolder(view);
     }
 
@@ -65,37 +66,11 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         // Use the transaction at index {position} to set up the row's UI widgets
-        Friend friend = friends.get(position);
-        holder.name.setText(friend.getName());
-        holder.username.setText(friend.getUsername());
-        if (friend.getPercent() >= 0) {
-            holder.gainArrow.setImageResource(R.drawable.arrowup);
-        } else {
-            holder.gainArrow.setImageResource(R.drawable.arrowdown);
-        }
-
-        holder.gainAmount.setText(friend.getPercent()+"");
-        holder.username.setText(friend.getUsername());
-        if (friend.getPercent() >= 0) {
-            holder.cardView.setCardBackgroundColor(Color.parseColor("#CEF6D8"));
-
-        } else {
-            holder.cardView.setCardBackgroundColor(Color.parseColor("#F8E6E0"));
-        }
-
-        holder.profilePic.setImageResource(friend.imageResource);
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Friend clickedOnFriend = friends.get(holder.getAdapterPosition());
-                Log.d("Friend", "Clicked "+ clickedOnFriend.getName());
-//                // Inform the click listener that this row was clicked and pass the Transaction
-//                // associated with this row.
-//                if (listener != null) {
-//                    listener.onTransactionClicked());
-//                }
-            }
-        });
+        final Action action = actions.get(position);
+        holder.stock.setText(action.getStock());
+        holder.date.setText(action.getDate());
+        holder.priceBought.setText("$"+action.getPriceBought());
+        holder.priceCurrent.setText("$"+action.getPriceCurrent());
     }
 
     /**
@@ -103,7 +78,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
      */
     @Override
     public int getItemCount() {
-        return friends.size();
+        return actions.size();
     }
 
     /**
@@ -114,24 +89,21 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
 
         CardView cardView;
 
-        TextView name;
+        TextView stock;
 
-        TextView gainAmount;
+        TextView date;
 
-        TextView username;
+        TextView priceBought;
 
-        ImageView gainArrow;
-
-        ImageView profilePic;
+        TextView priceCurrent;
 
         ViewHolder(View rootView) {
             super(rootView);
-            cardView = rootView.findViewById(R.id.card_container);
-            name = rootView.findViewById(R.id.name);
-            gainAmount = rootView.findViewById(R.id.gainAmount);
-            username = rootView.findViewById(R.id.username);
-            gainArrow = rootView.findViewById(R.id.gainArrow);
-            profilePic = rootView.findViewById(R.id.profilePic);
+            cardView = rootView.findViewById(R.id.card_container_profile);
+            stock = rootView.findViewById(R.id.stock);
+            date = rootView.findViewById(R.id.date);
+            priceBought = rootView.findViewById(R.id.priceBought);
+            priceCurrent = rootView.findViewById(R.id.priceCurrent);
         }
     }
 
@@ -140,7 +112,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
      * <p>
      * NOTE: Implement this when you want to click a row and go straight to the profile
      */
-    public interface FriendClickedListener {
-        void onFriendClicked(Friend friend);
+    public interface ActionClickedListener {
+        void onActionClicked(Action action);
     }
 }

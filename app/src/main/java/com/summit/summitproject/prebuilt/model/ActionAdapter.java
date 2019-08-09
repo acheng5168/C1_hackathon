@@ -69,8 +69,14 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         final Action action = actions.get(position);
         holder.stock.setText(action.getStock());
         holder.date.setText(action.getDate());
-        holder.priceBought.setText("$"+action.getPriceBought());
-        holder.priceCurrent.setText("$"+action.getPriceCurrent());
+        if (action.getType() == 1) {
+            holder.priceBought.setText("Bought: $"+action.getPriceBought());
+            holder.cardView.setCardBackgroundColor(Color.parseColor("#CEF6D8"));
+        } else {
+            holder.priceBought.setText("Sold: $"+action.getPriceBought());
+            holder.cardView.setCardBackgroundColor(Color.parseColor("#F8E6E0"));
+        }
+        holder.priceCurrent.setText("Current: $"+action.getPriceCurrent());
     }
 
     /**

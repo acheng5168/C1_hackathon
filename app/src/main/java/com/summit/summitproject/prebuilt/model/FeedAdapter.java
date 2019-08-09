@@ -82,7 +82,6 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
         Double gains = feedAction.getCurrentPrice() - feedAction.getActionPrice();
         System.out.print(gains);
-        Log.d("Gain Value", gains + "");
         if (feedAction.wasBought()) {
             if (gains >= 0) {
 

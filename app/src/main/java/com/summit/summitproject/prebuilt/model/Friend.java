@@ -54,6 +54,10 @@ public class Friend implements Serializable, Comparable {
     @Override
     public int compareTo(Object o) {
         Friend otherFriend = (Friend) o;
-        return (int) Math.ceil(this.getPercent() - otherFriend.getPercent());
+        if (this.getPercent() > otherFriend.getPercent()) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
 }

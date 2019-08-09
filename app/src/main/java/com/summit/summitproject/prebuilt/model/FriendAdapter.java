@@ -30,6 +30,8 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
      */
     private List<Friend> friends = new ArrayList<>();
 
+    public int tester = 1;
+
     /**
      * A listener to deliver callbacks to whenever a transaction in the list is clicked.
      */
@@ -61,6 +63,15 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
         return new ViewHolder(view);
     }
 
+    public void refreshOrder(List<Friend> newFriends) {
+        Collections.sort(newFriends);
+        Collections.reverse(newFriends);
+
+        for (Friend friend: newFriends) {
+            Log.d("friend", "" + friend.getPercent());
+        }
+        this.friends = newFriends;
+    }
     /**
      * Called when the UI needs the next row (at {position}) to be <b>filled with data</b> rendered
      * and passes the {@link ViewHolder} which should be filled with data.
@@ -68,6 +79,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         // Use the transaction at index {position} to set up the row's UI widgets
+
         Friend friend = friends.get(position);
         holder.name.setText(friend.getName());
         holder.username.setText(friend.getUsername());
@@ -77,7 +89,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
             holder.gainArrow.setImageResource(R.drawable.arrowdown);
         }
 
-        holder.gainAmount.setText(friend.getPercent()+"");
+        holder.gainAmount.setText(String.format("%.2f", friend.getPercent()) + "%");
         holder.username.setText(friend.getUsername());
         if (friend.getPercent() >= 0) {
             holder.cardView.setCardBackgroundColor(Color.parseColor("#CEF6D8"));
@@ -107,6 +119,11 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
     @Override
     public int getItemCount() {
         return friends.size();
+    }
+
+    public void updateData(List<Friend> friends) {
+        this.friends = friends;
+        this.notifyDataSetChanged();
     }
 
     /**

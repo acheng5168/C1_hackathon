@@ -178,34 +178,34 @@ public class LeaderboardActivity extends AppCompatActivity implements FriendAdap
         });
     }
 
-    private APIInterface apiInterface = APIClient.getRetrofit().create(APIInterface.class);
+//    private APIInterface apiInterface = APIClient.getRetrofit().create(APIInterface.class);
 
-    public double obtainStockPrice(String ticker) throws IOException {
-        Log.d("ticker", ticker);
-        Call<List<APIResponse>> call = apiInterface.getPrices(ticker, "lastSalePrice");
-        final DoubleHolder price = new DoubleHolder(Math.random() * 200);
-        call.enqueue(new Callback<List<APIResponse>>() {
-            @Override
-            public void onResponse(Call<List<APIResponse>> call, Response<List<APIResponse>> response) {
-                if (response.isSuccessful()) {
-                    List<APIResponse> res = response.body();
-
-                    Log.d("hi", res.get(0).getPrice());
-                    price.setVal(Double.parseDouble(res.get(0).getPrice()));
-
-                } else {
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<APIResponse>> call, Throwable t) {
-                Log.d("Error", t.getMessage());
-
-            }
-        });
-        return price.getVal();
-    }
+//    public double obtainStockPrice(String ticker) throws IOException {
+//        Log.d("ticker", ticker);
+//        Call<List<APIResponse>> call = apiInterface.getPrices(ticker, "lastSalePrice");
+//        final DoubleHolder price = new DoubleHolder(Math.random() * 200);
+//        call.enqueue(new Callback<List<APIResponse>>() {
+//            @Override
+//            public void onResponse(Call<List<APIResponse>> call, Response<List<APIResponse>> response) {
+//                if (response.isSuccessful()) {
+//                    List<APIResponse> res = response.body();
+//
+//                    Log.d("hi", res.get(0).getPrice());
+//                    price.setVal(Double.parseDouble(res.get(0).getPrice()));
+//
+//                } else {
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<APIResponse>> call, Throwable t) {
+//                Log.d("Error", t.getMessage());
+//
+//            }
+//        });
+//        return price.getVal();
+//    }
 
 
     public void randomAddToFeed() throws IOException {
@@ -220,7 +220,7 @@ public class LeaderboardActivity extends AppCompatActivity implements FriendAdap
             Date date = new Date();
             String randomTicker = tickers[tickerIndex];
             String timeStamp = formatter.format(date).replace(" ", ", ");
-            double price = obtainStockPrice(randomTicker);
+            double price = Math.random() * 200;
             //double price = Math.random();
             int buyOrSell = (int)(Math.round(Math.random()));
             int namesIndex = (int)(Math.random() * names.length);

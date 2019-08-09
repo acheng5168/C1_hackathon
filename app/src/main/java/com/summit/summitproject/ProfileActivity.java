@@ -91,21 +91,32 @@ public class ProfileActivity extends AppCompatActivity implements ActionAdapter.
         profile_activity_list = findViewById(R.id.profile_activity_list);
 
         List<Action> actions = new ArrayList<>();
-        actions.add(new Action("AAPL1", "08/08/2019", 15.0, 16.0));
-        actions.add(new Action("AAPL2", "08/08/2019", 15.0, 16.0));
-        actions.add(new Action("AAPL3", "08/08/2019", 15.0, 16.0));
-        actions.add(new Action("AAPL4", "08/08/2019", 15.0, 16.0));
-        actions.add(new Action("AAPL5", "08/08/2019", 15.0, 16.0));
+        actions.add(new Action("XLK", "08/08/2019, 10:16:19", 78.07, 79.39, 0));
+        actions.add(new Action("KO", "08/05/2019, 13:02:28", 52.91, 53.69, 1));
+        actions.add(new Action("CS", "07/29/2019, 13:15:38", 11.46, 11.58, 1));
+        actions.add(new Action("TCEHY", "07/28/2019, 11:28:49", 43.68, 43.84, 1));
+        actions.add(new Action("BAC", "07/26/2019, 14:32:28", 28.16, 28.38, 0));
+        actions.add(new Action("AAPL", "07/25/2019, 09:23:10", 200.23, 203.43, 0));
+        actions.add(new Action("GOOG", "07/18/2019, 12:48:29", 1194.37, 1204.80, 1));
+        actions.add(new Action("HAL", "07/17/2019, 12:21:28", 19.82, 19.93, 0));
+        actions.add(new Action("WFC", "07/15/2019, 09:42:49", 45.30, 46.40, 1));
 
         actionAdapter = new ActionAdapter(actions, this);
 
         profile_analytics_list = findViewById(R.id.profile_analytics_list);
 
         List<Analysis> analyses = new ArrayList<>();
-        analyses.add(new Analysis("AAPL", 25.0));
-        analyses.add(new Analysis("AAPL2", 25.0));
-        analyses.add(new Analysis("AAPL3", 25.0));
-        analyses.add(new Analysis("AAPL4", 25.0));
+        analyses.add(new Analysis("GOOG", 71.35));
+        analyses.add(new Analysis("AAPL", 11.96));
+        analyses.add(new Analysis("XLK", 4.66));
+        analyses.add(new Analysis("KO", 3.16));
+        analyses.add(new Analysis("WFC", 2.71));
+        analyses.add(new Analysis("TCEHY", 2.16));
+        analyses.add(new Analysis("BAC", 1.68));
+        analyses.add(new Analysis("HAL", 1.18));
+        analyses.add(new Analysis("CS", 0.68));
+
+
 
         analysesAdapter = new AnalysisAdapter(analyses, this);
 

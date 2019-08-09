@@ -133,7 +133,7 @@
                 android:id="@+id/button6"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="Follow"
+                android:text="Following"
                 android:textSize="10sp" />
 
         </LinearLayout>
@@ -151,7 +151,7 @@
                 android:gravity="left"
                 android:paddingLeft="5dp"
                 android:text="Shane Aung"
-                android:textSize="30sp"
+                android:textSize="28sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -169,7 +169,7 @@
                 android:layout_height="36dp"
                 android:gravity="left"
                 android:paddingLeft="5dp"
-                android:text="69,420 Followers"
+                android:text="753 Followers"
                 android:textSize="18sp" />
 
         </LinearLayout>
@@ -185,8 +185,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="+ 2.1 %"
-                android:textSize="36sp"
+                android:text="+ 2.18 %"
+                android:textColor="#4CAF50"
+                android:textSize="28sp"
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>

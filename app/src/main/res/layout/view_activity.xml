@@ -28,7 +28,7 @@
                     android:id="@+id/stock"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="8dp"
+                    android:paddingLeft="10dp"
                     android:paddingRight="8dp"
                     android:text="Stock"
                     android:textSize="30sp" />
@@ -41,7 +41,7 @@
                     android:paddingRight="8dp"
                     android:paddingBottom="8dp"
                     android:text="Date"
-                    android:textSize="24sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -54,10 +54,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:paddingTop="5dp"
+                    android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:text="Price Bought:"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/priceCurrent"
@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Current Price:"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
